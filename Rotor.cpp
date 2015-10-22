@@ -38,15 +38,17 @@ void Rotor::encode(int &letter)
 
 void Rotor::inverseEncode(int &letter)
 {
-  letter = (((letter - numberOfRotations) % 26) + 26) % 26;
   for (vector<pair<int, int> >::iterator it = p_mapper->begin(); it != p_mapper->end(); ++it)
   {
     if ((*it).second == letter)
     {
       letter = (*it).first;
-      return;
+      goto end;
     }
   }
+  end:
+  letter = (((letter - numberOfRotations) % 26) + 26) % 26;
+
 }
 
 

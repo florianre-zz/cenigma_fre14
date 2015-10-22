@@ -66,13 +66,13 @@ void Enigma::encryptLetter(int &letter)
   {
     (*it)->encode(letter);
   }
-  rotate();
   reflector->encode(letter);
   for (vector<Rotor*>::reverse_iterator rit = rotors->rbegin(); rit != rotors->rend(); ++rit)
   {
     (*rit)->inverseEncode(letter);
   }
   plugboard->encode(letter);
+  rotate();
 }
 
 
