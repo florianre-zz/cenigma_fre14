@@ -61,7 +61,6 @@ void Enigma::rotate()
 
 void Enigma::encryptLetter(int &letter)
 {
-  rotate();
   plugboard->encode(letter);
   for (vector<Rotor*>::iterator it = rotors->begin(); it != rotors->end(); ++it)
   {
@@ -73,6 +72,7 @@ void Enigma::encryptLetter(int &letter)
     (*rit)->inverseEncode(letter);
   }
   plugboard->encode(letter);
+  rotate();
 }
 
 
