@@ -1,4 +1,5 @@
 #include <iostream>
+#include <assert.h>
 
 #include "Enigma.hpp"
 #include "Utils.hpp"
@@ -10,6 +11,8 @@ void setUpEnigmaMachine(Enigma* enigma, int argc, char **argv);
 
 int main(int argc, char **argv)
 {
+  assert(argc > 1 && "Error: arguments missing");
+
   //Initialise enigma
   Enigma* pEnigma = new Enigma();
   setUpEnigmaMachine(pEnigma, argc, argv);
