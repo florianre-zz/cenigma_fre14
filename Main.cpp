@@ -1,11 +1,14 @@
 #include <iostream>
 #include <assert.h>
+#include <sys/stat.h>
 
 #include "Enigma.hpp"
 #include "Utils.hpp"
 
 //Gets file extension of input file string
 string getFileExt(const string& s);
+//Checks if input file exists
+bool fileExists(const char* file);
 //Sets up enigma machine with correct plugboard and rotors
 void setUpEnigmaMachine(Enigma* enigma, int argc, char **argv);
 
@@ -45,6 +48,11 @@ string getFileExt(const string& s) {
   return("");
 }
 
+bool fileExists(const char* file) {
+  struct stat buf;
+  return (stat(file, &buf) == 0);
+}
+
 void setUpEnigmaMachine(Enigma* enigma, int argc, char **argv) {
   ifstream file;
   string fileExtension;
@@ -52,19 +60,28 @@ void setUpEnigmaMachine(Enigma* enigma, int argc, char **argv) {
   enigma->setReflector();
   for (int i = 1; i < argc; ++i)
   {
+    if (!fileExists(argv[i])) {
+      cerr << "File does not exist" << endl;
+      throw;
+    }
     fileExtension = getFileExt(argv[i]);
 
     if (fileExtension == "rot") { //Rotor Case
       file.open(argv[i]);
-      enigma->addRotor(new Rotor(file));
-      file.close();
-      file.clear();
+      if (file){
+        enigma->addRotor(new Rotor(file));
+        file.close();
+        file.clear();
+      }
+
     } else if (fileExtension == "pb") //Plugboard Case
     {
       file.open(argv[i]);
-      enigma->setPlugboard(new Plugboard(file));
-      file.close();
-      file.clear();
+      if (file) {
+        enigma->setPlugboard(new Plugboard(file));
+        file.close();
+        file.clear();
+      }
     } else //Other
     {
       cout << "Error";
