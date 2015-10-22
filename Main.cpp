@@ -64,9 +64,10 @@ void setUpEnigmaMachine(Enigma* enigma, int argc, char **argv) {
       cerr << "File does not exist" << endl;
       throw;
     }
+
     fileExtension = getFileExt(argv[i]);
 
-    if (fileExtension == "rot") { //Rotor Case
+    if (fileExtension == "rot") {
       file.open(argv[i]);
       if (file){
         enigma->addRotor(new Rotor(file));
@@ -74,7 +75,7 @@ void setUpEnigmaMachine(Enigma* enigma, int argc, char **argv) {
         file.clear();
       }
 
-    } else if (fileExtension == "pb") //Plugboard Case
+    } else if (fileExtension == "pb")
     {
       file.open(argv[i]);
       if (file) {
