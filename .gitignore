@@ -2,6 +2,8 @@
 
 #ignore temp files
 *~
+.idea/
+CMakeLists.txt
 
 #ignore pdf files (just keep source files)
 *.pdf
