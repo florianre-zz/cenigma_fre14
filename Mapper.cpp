@@ -9,6 +9,7 @@ Mapper::Mapper() {
 Mapper::~Mapper()
 {
   p_mapper->clear();
+  delete p_mapper;
 }
 
 void Mapper::insertInMapper(int letter, int encryptedLetter)

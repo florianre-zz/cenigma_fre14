@@ -14,7 +14,7 @@ public:
   Mapper();
   ~Mapper();
   void insertInMapper(int letter, int encryptedLetter);
-  virtual void swapWithEncryption(int& letter) =0;
+  virtual void encode(int& letter) =0;
 };
 
 #endif

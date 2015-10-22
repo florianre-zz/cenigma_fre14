@@ -7,9 +7,10 @@
 class Plugboard : public Mapper
 {
 public:
-  Plugboard(ifstream& file);
-  void setUp(ifstream& file);
-  void swapWithEncryption(int &letter);
+  Plugboard(ifstream &file);
+  ~Plugboard();
+  void setUp(ifstream &file);
+  void encode(int &letter);
 };
 
 #endif

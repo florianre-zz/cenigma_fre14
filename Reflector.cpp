@@ -2,9 +2,12 @@
 
 const int lengthOfAlphabet = 26;
 
-Reflector::Reflector() {
+Reflector::Reflector()
+{
   setUp();
 }
+
+Reflector::~Reflector() {}
 
 void Reflector::setUp()
 {
@@ -14,7 +17,7 @@ void Reflector::setUp()
   }
 }
 
-void Reflector::swapWithEncryption(int &letter)
+void Reflector::encode(int &letter)
 {
   letter = p_mapper->at(letter).second;
 }

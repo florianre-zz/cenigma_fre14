@@ -4,6 +4,7 @@
 *~
 .idea/
 CMakeLists.txt
+enigma.dSYM/
 
 #ignore pdf files (just keep source files)
 *.pdf

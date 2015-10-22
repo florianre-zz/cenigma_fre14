@@ -7,26 +7,25 @@
 #ifndef ENIGMA_HPP
 #define ENIGMA_HPP
 
-using namespace std;
-
 class Enigma
 {
 private:
-  vector<Rotor*>* rotors;
-  Plugboard* plugboard;
-  Reflector* reflector;
+  vector<Rotor*> *rotors;
+  Plugboard *plugboard;
+  Reflector *reflector;
 
 public:
   Enigma();
   ~Enigma();
-  void setPlugboard(Plugboard* p);
+  void setPlugboard(Plugboard *p);
   void setReflector();
-  Plugboard* getPlugboard();
-  vector<Rotor*>* getRotors();
-  Reflector* getReflector();
-  void addRotor(Rotor* r);
-  void encryptLetter(int& letter);
+  Plugboard *getPlugboard();
+  vector<Rotor*> *getRotors();
+  Reflector *getReflector();
+  void addRotor(Rotor *r);
+  void rotate();
+  void encryptLetter(int &letter);
+  void encryptMessage(string &message);
 };
-
 
 #endif

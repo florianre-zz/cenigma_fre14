@@ -7,9 +7,9 @@ class Reflector: public Mapper
 {
 public:
   Reflector();
+  ~Reflector();
   void setUp();
-  void swapWithEncryption(int &letter);
+  void encode(int &letter);
 };
-
 
 #endif

@@ -6,13 +6,16 @@
 #define ROTOR_HPP
 
 class Rotor : public Mapper
-
 {
+private:
+  int numberOfRotations;
 public:
-  Rotor(ifstream& file);
-  void setUp(ifstream& file);
-  void swapWithEncryption(int &letter);
-  void inverseSwapWithEncryption(int &letter);
+  Rotor(ifstream &file);
+  ~Rotor();
+  int &getNumberOfRotations();
+  void setUp(ifstream &file);
+  void encode(int &letter);
+  void inverseEncode(int &letter);
 };
 
 #endif

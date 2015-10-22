@@ -1,14 +1,22 @@
-#include "iostream"
 #include "Rotor.hpp"
 
 const int lengthOfAlphabet = 26;
 
-Rotor::Rotor(ifstream& file) {
+Rotor::Rotor(ifstream &file)
+{
   setUp(file);
 }
 
-void Rotor::setUp(ifstream& file)
+Rotor::~Rotor() {}
+
+int &Rotor::getNumberOfRotations()
 {
+  return numberOfRotations;
+}
+
+void Rotor::setUp(ifstream &file)
+{
+  numberOfRotations = 0;
   int index = 0, encryptedIndex;
   while (file >> encryptedIndex)
   {
@@ -16,8 +24,9 @@ void Rotor::setUp(ifstream& file)
   }
 }
 
-void Rotor::swapWithEncryption(int &letter)
+void Rotor::encode(int &letter)
 {
+  letter += numberOfRotations;
   for (vector<pair<int, int> >::iterator it = p_mapper->begin(); it != p_mapper->end(); ++it) {
     if ((*it).first == letter)
     {
@@ -27,8 +36,9 @@ void Rotor::swapWithEncryption(int &letter)
   }
 }
 
-void Rotor::inverseSwapWithEncryption(int &letter)
+void Rotor::inverseEncode(int &letter)
 {
+  letter -= numberOfRotations;
   for (vector<pair<int, int> >::iterator it = p_mapper->begin(); it != p_mapper->end(); ++it)
   {
     if ((*it).second == letter)

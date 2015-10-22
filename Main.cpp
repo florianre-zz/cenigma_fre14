@@ -3,14 +3,13 @@
 #include <sys/stat.h>
 
 #include "Enigma.hpp"
-#include "Utils.hpp"
 
 //Gets file extension of input file string
-string getFileExt(const string& s);
+string getFileExt(const string &s);
 //Checks if input file exists
-bool fileExists(const char* file);
+bool fileExists(const char *file);
 //Sets up enigma machine with correct plugboard and rotors
-void setUpEnigmaMachine(Enigma* enigma, int argc, char **argv);
+void setUpEnigmaMachine(Enigma *enigma, int numberOfEnigmaElements, char **enigmaElements);
 
 int main(int argc, char **argv)
 {
@@ -20,19 +19,10 @@ int main(int argc, char **argv)
   Enigma* pEnigma = new Enigma();
   setUpEnigmaMachine(pEnigma, argc, argv);
 
-  //Encrypt input message
+  //Input message - encrypt message - output encryption
   string message;
   getline(cin, message);
-
-  for (int i = 0; i < message.size(); i++) {
-    if (message.at(i) != ' ')
-    {
-      int indexInAlp = toInt(message.at(i));
-      pEnigma->encryptLetter(indexInAlp);
-      message.at(i) = toChar(indexInAlp);
-    }
-  }
-
+  pEnigma->encryptMessage(message);
   cout << message << endl;
 
   //Clear memory
@@ -40,52 +30,57 @@ int main(int argc, char **argv)
   return 0;
 }
 
-string getFileExt(const string& s) {
+string getFileExt(const string &s) {
   size_t i = s.rfind('.', s.length());
   if (i != string::npos) {
-    return(s.substr(i+1, s.length() - i));
+    return(s.substr(i + 1, s.length() - i));
   }
   return("");
 }
 
-bool fileExists(const char* file) {
+bool fileExists(const char *file) {
   struct stat buf;
   return (stat(file, &buf) == 0);
 }
 
-void setUpEnigmaMachine(Enigma* enigma, int argc, char **argv) {
+void setUpEnigmaMachine(Enigma *enigma, int numberOfEnigmaElements, char **enigmaElements) {
   ifstream file;
   string fileExtension;
 
   enigma->setReflector();
-  for (int i = 1; i < argc; ++i)
+
+  for (int i = 1; i < numberOfEnigmaElements; ++i)
   {
-    if (!fileExists(argv[i])) {
-      cerr << "File does not exist" << endl;
-      throw;
+    //Throws error if file does not exist
+    if (!fileExists(enigmaElements[i])) {
+      throw "File does not exist";
     }
 
-    fileExtension = getFileExt(argv[i]);
+    fileExtension = getFileExt(enigmaElements[i]);
 
+    //Rotor file case
     if (fileExtension == "rot") {
-      file.open(argv[i]);
+      file.open(enigmaElements[i]);
       if (file){
         enigma->addRotor(new Rotor(file));
         file.close();
         file.clear();
       }
 
+    //Plugboard file case
     } else if (fileExtension == "pb")
     {
-      file.open(argv[i]);
+      file.open(enigmaElements[i]);
       if (file) {
         enigma->setPlugboard(new Plugboard(file));
         file.close();
         file.clear();
       }
-    } else //Other
+
+    //Other
+    } else
     {
-      cout << "Error";
+      throw "Wrong type of file";
     }
   }
 }

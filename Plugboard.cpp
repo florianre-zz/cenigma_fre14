@@ -1,10 +1,13 @@
 #include "Plugboard.hpp"
 
-Plugboard::Plugboard(ifstream& file) {
+Plugboard::Plugboard(ifstream& file)
+{
   setUp(file);
 }
 
-void Plugboard::setUp(ifstream& file)
+Plugboard::~Plugboard() {}
+
+void Plugboard::setUp(ifstream &file)
 {
   int from, to;
   while (file >> from >> to) {
@@ -12,7 +15,7 @@ void Plugboard::setUp(ifstream& file)
   }
 }
 
-void Plugboard::swapWithEncryption(int &letter)
+void Plugboard::encode(int &letter)
 {
   for (vector<pair<int, int> >::iterator it = p_mapper->begin(); it != p_mapper->end(); ++it)
   {
