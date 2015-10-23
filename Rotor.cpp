@@ -48,12 +48,12 @@ void Rotor::encode(int &letter)
 //  cout << "rotations: " << numberOfRotations << endl;
 //  cout << "f: " << letter << " ";
   letter = (letter + numberOfRotations) % 26;
-  cout << letter << " ";
+  //cout << letter << " ";
   for (vector<pair<int, int> >::iterator it = p_mapper->begin(); it != p_mapper->end(); ++it) {
     if ((*it).first == letter)
     {
       letter = (*it).second;
-      cout << letter << endl;
+      //cout << letter << endl;
       return;
     }
   }
