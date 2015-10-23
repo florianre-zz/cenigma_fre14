@@ -47,12 +47,17 @@ void Enigma::addRotor(Rotor* r)
 
 }
 
-void Enigma::rotate()
+void Enigma::rotateRotors()
 {
-  for (vector<Rotor*>::iterator it = rotors->begin(); it != rotors->end(); ++it)
+  for (int i = 0; i < rotors->size(); ++i)
   {
-    (*it)->getNumberOfRotations() = ((*it)->getNumberOfRotations() + 1)%26;
-    if ((*it)->getNumberOfRotations() != 26)
+    int temp = rotors->at(i)->getNumberOfRevolutions();
+    rotors->at(i)->rotate();
+    if (i < rotors->size() - 1)
+    {
+      rotors->at(i+1)->adjustAfterRotation();
+    }
+    if (rotors->at(i)->getNumberOfRevolutions() == temp)
     {
       break;
     }
@@ -72,7 +77,7 @@ void Enigma::encryptLetter(int &letter)
     (*rit)->inverseEncode(letter);
   }
   plugboard->encode(letter);
-  rotate();
+  rotateRotors();
 }
 
 

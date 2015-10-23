@@ -23,7 +23,7 @@ public:
   vector<Rotor*> *getRotors();
   Reflector *getReflector();
   void addRotor(Rotor *r);
-  void rotate();
+  void rotateRotors();
   void encryptLetter(int &letter);
   void encryptMessage(string &message);
 };

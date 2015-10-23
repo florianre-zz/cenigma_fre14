@@ -8,12 +8,14 @@
 class Rotor : public Mapper
 {
 private:
-  int numberOfRotations;
+  int numberOfRotations, numRevolutions;
 public:
   Rotor(ifstream &file);
   ~Rotor();
-  int &getNumberOfRotations();
+  int &getNumberOfRevolutions();
   void setUp(ifstream &file);
+  void rotate();
+  void adjustAfterRotation();
   void encode(int &letter);
   void inverseEncode(int &letter);
 };
