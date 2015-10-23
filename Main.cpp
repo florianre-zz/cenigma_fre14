@@ -28,15 +28,14 @@ int main(int argc, char **argv)
   char inputLetter;
   do
   {
-    cin >> inputLetter;
+    inputLetter = getchar();
     if (!isspace(inputLetter))
     {
       int indexedLetter = toInt(inputLetter);
       pEnigma->encryptLetter(indexedLetter);
       inputLetter = toChar(indexedLetter);
     }
-    cout << inputLetter;
-    fflush(stdin);
+    putchar(inputLetter);
   } while (!cin.eof());
 
   //Clear memory
