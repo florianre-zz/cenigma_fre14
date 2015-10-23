@@ -19,9 +19,6 @@ public:
   ~Enigma();
   void setPlugboard(Plugboard *p);
   void setReflector();
-  Plugboard *getPlugboard();
-  vector<Rotor*> *getRotors();
-  Reflector *getReflector();
   void addRotor(Rotor *r);
   void rotateRotors();
   void encryptLetter(int &letter);

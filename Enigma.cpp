@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "Enigma.hpp"
-#include "Utils.hpp"
 
 Enigma::Enigma()
 {
@@ -14,21 +13,6 @@ Enigma::~Enigma()
   delete rotors;
   delete plugboard;
   delete reflector;
-}
-
-Plugboard* Enigma::getPlugboard()
-{
-  return plugboard;
-}
-
-Reflector* Enigma::getReflector()
-{
-  return reflector;
-}
-
-vector<Rotor*>* Enigma::getRotors()
-{
-  return rotors;
 }
 
 void Enigma::setPlugboard(Plugboard* p)
@@ -49,15 +33,15 @@ void Enigma::addRotor(Rotor* r)
 
 void Enigma::rotateRotors()
 {
-  for (int i = 0; i < rotors->size(); ++i)
+  for (vector<Rotor *>::iterator it = rotors->begin(); it != rotors->end(); ++it)
   {
-    int temp = rotors->at(i)->getNumberOfRevolutions();
-    rotors->at(i)->rotate();
-    if (i < rotors->size() - 1)
+    int temp = (*it)->getNumberOfRevolutions();
+    (*it)->rotate();
+    if ((it + 1) != rotors->end())
     {
-      rotors->at(i+1)->adjustAfterRotation();
+      (*(it + 1))->adjustAfterRotation();
     }
-    if (rotors->at(i)->getNumberOfRevolutions() == temp)
+    if ((*it)->getNumberOfRevolutions() == temp)
     {
       break;
     }
@@ -81,14 +65,14 @@ void Enigma::encryptLetter(int &letter)
 }
 
 
-void Enigma::encryptMessage(string &message)
-{
-  for (int i = 0; i < message.size(); i++) {
-    if (message.at(i) != ' ')
-    {
-      int indexInAlp = toInt(message.at(i));
-      encryptLetter(indexInAlp);
-      message.at(i) = toChar(indexInAlp);
-    }
-  }
-}
+//void Enigma::encryptMessage(string &message)
+//{
+//  for (int i = 0; i < message.size(); i++) {
+//    if (message.at(i) != ' ')
+//    {
+//      int indexInAlp = toInt(message.at(i));
+//      encryptLetter(indexInAlp);
+//      message.at(i) = toChar(indexInAlp);
+//    }
+//  }
+//}

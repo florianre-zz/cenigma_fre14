@@ -3,6 +3,7 @@
 #include <sys/stat.h>
 
 #include "Enigma.hpp"
+#include "Utils.hpp"
 
 //Gets file extension of input file string
 string getFileExt(const string &s);
@@ -20,10 +21,23 @@ int main(int argc, char **argv)
   setUpEnigmaMachine(pEnigma, argc, argv);
 
   //Input message - encrypt message - output encryption
-  string message;
-  getline(cin, message);
-  pEnigma->encryptMessage(message);
-  cout << message << endl;
+//  string message;
+//  getline(cin, message);
+//  pEnigma->encryptMessage(message);
+//  cout << message << endl;
+  char inputLetter;
+  do
+  {
+    cin >> inputLetter;
+    if (!isspace(inputLetter))
+    {
+      int indexedLetter = toInt(inputLetter);
+      pEnigma->encryptLetter(indexedLetter);
+      inputLetter = toChar(indexedLetter);
+    }
+    cout << inputLetter;
+    //fflush(stdin);
+  } while (!cin.eof());
 
   //Clear memory
   delete pEnigma;
