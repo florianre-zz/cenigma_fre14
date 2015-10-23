@@ -1,9 +1,6 @@
-#include <vector>
-
 #include "Plugboard.hpp"
 #include "Reflector.hpp"
 #include "Rotor.hpp"
-#include "Utils.hpp"
 
 #ifndef ENIGMA_HPP
 #define ENIGMA_HPP
@@ -11,7 +8,7 @@
 class Enigma
 {
 private:
-  vector<Rotor*> *rotors;
+  vector<Rotor *> *rotors;
   Plugboard *plugboard;
   Reflector *reflector;
 
@@ -22,8 +19,7 @@ public:
   void setReflector();
   void addRotor(Rotor *r);
   void rotateRotors();
-  void encryptLetter(int &letter);
-  void encryptMessage(string &message);
+  void encrypt(int &letter);
 };
 
 #endif

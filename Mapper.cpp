@@ -1,8 +1,7 @@
-#include <iostream>
-
 #include "Mapper.hpp"
 
-Mapper::Mapper() {
+Mapper::Mapper()
+{
   p_mapper = new vector<pair <int, int> >;
 }
 

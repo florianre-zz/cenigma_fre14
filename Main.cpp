@@ -3,6 +3,7 @@
 #include <sys/stat.h>
 
 #include "Enigma.hpp"
+#include "Utils.hpp"
 
 //Gets file extension of input file string
 string getFileExt(const string &s);
@@ -19,37 +20,29 @@ int main(int argc, char **argv)
   Enigma* pEnigma = new Enigma();
   setUpEnigmaMachine(pEnigma, argc, argv);
 
-  //Input message - encrypt message - output encryption
+  //Encrypt message
+  char inputLetter;
 
-    string message;
-    while(!cin.eof()) {
-      cin >> ws;
-      getline(cin, message);
-      pEnigma->encryptMessage(message);
-      cout << message;
+  while (cin >> inputLetter)
+  {
+    if (!isspace(inputLetter))
+    {
+      int indexedLetter = toInt(inputLetter);
+      pEnigma->encrypt(indexedLetter);
+      inputLetter = toChar(indexedLetter);
     }
-//  getline(cin, message);
-//  pEnigma->encryptMessage(message);
-//  cout << message << endl;
-//  char inputLetter;
-//  do
-//  {
-//    inputLetter = getchar();
-//    if (!isspace(inputLetter))
-//    {
-//      int indexedLetter = toInt(inputLetter);
-//      pEnigma->encryptLetter(indexedLetter);
-//      inputLetter = toChar(indexedLetter);
-//    }
-//    putchar(inputLetter);
-//  } while (!cin.eof());
+    cout << inputLetter;
+    cin >> ws;
+  }
 
   //Clear memory
   delete pEnigma;
+
   return 0;
 }
 
-string getFileExt(const string &s) {
+string getFileExt(const string &s)
+{
   size_t i = s.rfind('.', s.length());
   if (i != string::npos) {
     return(s.substr(i + 1, s.length() - i));
@@ -62,7 +55,8 @@ bool fileExists(const char *file) {
   return (stat(file, &buf) == 0);
 }
 
-void setUpEnigmaMachine(Enigma *enigma, int numberOfEnigmaElements, char **enigmaElements) {
+void setUpEnigmaMachine(Enigma *enigma, int numberOfEnigmaElements, char **enigmaElements)
+{
   ifstream file;
   string fileExtension;
 

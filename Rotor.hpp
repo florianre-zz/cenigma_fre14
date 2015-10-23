@@ -9,12 +9,13 @@ class Rotor : public Mapper
 {
 private:
   int numberOfRotations, numRevolutions;
+  bool revolutionCompleted;
 public:
   Rotor(ifstream &file);
   ~Rotor();
-  int &getNumberOfRevolutions();
   void setUp(ifstream &file);
   void rotate();
+  bool hasCompletedARevolution();
   void adjustAfterRotation();
   void encode(int &letter);
   void inverseEncode(int &letter);

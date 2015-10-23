@@ -9,14 +9,10 @@ Rotor::Rotor(ifstream &file)
 
 Rotor::~Rotor() {}
 
-int &Rotor::getNumberOfRevolutions()
-{
-  return numRevolutions;
-}
-
 void Rotor::setUp(ifstream &file)
 {
   numberOfRotations = numRevolutions = 0;
+  revolutionCompleted = false;
   int index = 0, encryptedIndex;
   while (file >> encryptedIndex)
   {
@@ -24,13 +20,18 @@ void Rotor::setUp(ifstream &file)
   }
 }
 
-
 void Rotor::rotate()
 {
   if (++numberOfRotations == 26) {
-    ++numRevolutions;
+    revolutionCompleted = true;
     numberOfRotations = 0;
+  } else {
+    revolutionCompleted = false;
   }
+}
+
+bool Rotor::hasCompletedARevolution() {
+  return revolutionCompleted;
 }
 
 void Rotor::adjustAfterRotation()
@@ -43,23 +44,18 @@ void Rotor::adjustAfterRotation()
 
 void Rotor::encode(int &letter)
 {
-//  cout << "f: " << letter << " ";
   letter = (letter + numberOfRotations) % 26;
-  //cout << letter << " ";
   for (vector<pair<int, int> >::iterator it = p_mapper->begin(); it != p_mapper->end(); ++it) {
     if ((*it).first == letter)
     {
       letter = (*it).second;
-      //cout << letter << endl;
       return;
     }
   }
-  //cout << letter << endl;
 }
 
 void Rotor::inverseEncode(int &letter)
 {
-  //cout << "f(-1): " << letter << " ";
   for (vector<pair<int, int> >::iterator it = p_mapper->begin(); it != p_mapper->end(); ++it)
   {
     if ((*it).second == letter)
@@ -69,8 +65,7 @@ void Rotor::inverseEncode(int &letter)
     }
   }
   end:
-  letter = (((letter - numberOfRotations) % 26) + 26) % 26;
-  //cout << letter << endl;
+  letter = ((letter - numberOfRotations) % 26 + 26) % 26;
   return;
 }
 
