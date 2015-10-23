@@ -68,11 +68,15 @@ void Enigma::encryptLetter(int &letter)
 void Enigma::encryptMessage(string &message)
 {
   for (int i = 0; i < message.size(); i++) {
-    if (message.at(i) != ' ')
+    char& workingLetter = message.at(i);
+    if (!isspace(workingLetter))
     {
-      int indexInAlp = toInt(message.at(i));
+      int indexInAlp = toInt(workingLetter);
       encryptLetter(indexInAlp);
-      message.at(i) = toChar(indexInAlp);
+      workingLetter = toChar(indexInAlp);
+    } else {
+      workingLetter = '\0';
     }
+
   }
 }

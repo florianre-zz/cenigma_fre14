@@ -23,6 +23,7 @@ int main(int argc, char **argv)
 
     string message;
     while(!cin.eof()) {
+      cin >> ws;
       getline(cin, message);
       pEnigma->encryptMessage(message);
       cout << message;
