@@ -36,7 +36,7 @@ int main(int argc, char **argv)
       inputLetter = toChar(indexedLetter);
     }
     cout << inputLetter;
-    //fflush(stdin);
+    fflush(stdin);
   } while (!cin.eof());
 
   //Clear memory
