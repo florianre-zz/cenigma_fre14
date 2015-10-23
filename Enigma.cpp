@@ -65,14 +65,14 @@ void Enigma::encryptLetter(int &letter)
 }
 
 
-//void Enigma::encryptMessage(string &message)
-//{
-//  for (int i = 0; i < message.size(); i++) {
-//    if (message.at(i) != ' ')
-//    {
-//      int indexInAlp = toInt(message.at(i));
-//      encryptLetter(indexInAlp);
-//      message.at(i) = toChar(indexInAlp);
-//    }
-//  }
-//}
+void Enigma::encryptMessage(string &message)
+{
+  for (int i = 0; i < message.size(); i++) {
+    if (message.at(i) != ' ')
+    {
+      int indexInAlp = toInt(message.at(i));
+      encryptLetter(indexInAlp);
+      message.at(i) = toChar(indexInAlp);
+    }
+  }
+}

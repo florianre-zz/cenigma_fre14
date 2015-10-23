@@ -3,6 +3,7 @@
 #include "Plugboard.hpp"
 #include "Reflector.hpp"
 #include "Rotor.hpp"
+#include "Utils.hpp"
 
 #ifndef ENIGMA_HPP
 #define ENIGMA_HPP
