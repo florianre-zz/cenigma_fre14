@@ -45,8 +45,8 @@ void Rotor::adjustAfterRotation()
 
 void Rotor::encode(int &letter)
 {
-  cout << "rotations: " << numberOfRotations << endl;
-  cout << "f: " << letter << " ";
+//  cout << "rotations: " << numberOfRotations << endl;
+//  cout << "f: " << letter << " ";
   letter = (letter + numberOfRotations) % 26;
   cout << letter << " ";
   for (vector<pair<int, int> >::iterator it = p_mapper->begin(); it != p_mapper->end(); ++it) {
@@ -57,12 +57,12 @@ void Rotor::encode(int &letter)
       return;
     }
   }
-  cout << letter << endl;
+  //cout << letter << endl;
 }
 
 void Rotor::inverseEncode(int &letter)
 {
-  cout << "f(-1): " << letter << " ";
+  //cout << "f(-1): " << letter << " ";
   for (vector<pair<int, int> >::iterator it = p_mapper->begin(); it != p_mapper->end(); ++it)
   {
     if ((*it).second == letter)
@@ -73,7 +73,7 @@ void Rotor::inverseEncode(int &letter)
   }
   end:
   letter = (((letter - numberOfRotations) % 26) + 26) % 26;
-  cout << letter << endl;
+  //cout << letter << endl;
   return;
 }
 
