@@ -10,7 +10,6 @@ class Plugboard : public Mapper
 public:
   Plugboard(ifstream &file);
   ~Plugboard();
-  void setUp(ifstream &file);
   void encode(int &letter);
 };
 

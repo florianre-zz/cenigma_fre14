@@ -4,18 +4,14 @@ const int lengthOfAlphabet = 26;
 
 Reflector::Reflector()
 {
-  setUp();
-}
-
-Reflector::~Reflector() {}
-
-void Reflector::setUp()
-{
+  // Creates a mapping from letters to there reflected letter
   for (int i = 0; i < lengthOfAlphabet; ++i)
   {
     insertInMapper(i, (i+lengthOfAlphabet/2)%lengthOfAlphabet);
   }
 }
+
+Reflector::~Reflector() {}
 
 void Reflector::encode(int &letter)
 {

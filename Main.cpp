@@ -17,26 +17,21 @@ int main(int argc, char **argv)
   assert(argc > 1 && "Error: arguments missing");
 
   //Initialise enigma
-  Enigma* pEnigma = new Enigma();
-  setUpEnigmaMachine(pEnigma, argc, argv);
+  Enigma* p_Enigma = new Enigma();
+  setUpEnigmaMachine(p_Enigma, argc, argv);
 
   //Encrypt message
   char inputLetter;
-
-  while (cin >> inputLetter)
+  while (cin >> ws >> inputLetter)
   {
-    if (!isspace(inputLetter))
-    {
-      int indexedLetter = toInt(inputLetter);
-      pEnigma->encrypt(indexedLetter);
-      inputLetter = toChar(indexedLetter);
-    }
+    int indexedLetter = toInt(inputLetter);
+    p_Enigma->encrypt(indexedLetter);
+    inputLetter = toChar(indexedLetter);
     cout << inputLetter;
-    cin >> ws;
   }
 
   //Clear memory
-  delete pEnigma;
+  delete p_Enigma;
 
   return 0;
 }
@@ -47,7 +42,7 @@ string getFileExt(const string &s)
   if (i != string::npos) {
     return(s.substr(i + 1, s.length() - i));
   }
-  return("");
+  return "";
 }
 
 bool fileExists(const char *file) {
@@ -72,7 +67,8 @@ void setUpEnigmaMachine(Enigma *enigma, int numberOfEnigmaElements, char **enigm
     fileExtension = getFileExt(enigmaElements[i]);
 
     //Rotor file case
-    if (fileExtension == "rot") {
+    if (fileExtension == "rot")
+    {
       file.open(enigmaElements[i]);
       if (file){
         enigma->addRotor(new Rotor(file));

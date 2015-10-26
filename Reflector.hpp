@@ -8,7 +8,6 @@ class Reflector: public Mapper
 public:
   Reflector();
   ~Reflector();
-  void setUp();
   void encode(int &letter);
 };
 

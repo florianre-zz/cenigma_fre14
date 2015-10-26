@@ -2,18 +2,15 @@
 
 Plugboard::Plugboard(ifstream& file)
 {
-  setUp(file);
-}
-
-Plugboard::~Plugboard() {}
-
-void Plugboard::setUp(ifstream &file)
-{
+  // Reads indices from file in pairs (pair consists of letters to be swapped) and inserts the pair in the mapper
   int from, to;
-  while (file >> from >> to) {
+  while (file >> from >> to)
+  {
     insertInMapper(from, to);
   }
 }
+
+Plugboard::~Plugboard() {}
 
 void Plugboard::encode(int &letter)
 {

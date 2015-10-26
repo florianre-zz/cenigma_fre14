@@ -2,38 +2,39 @@
 
 Enigma::Enigma()
 {
-  rotors = new vector<Rotor *>;
+  // Created empty vectors of pointers of Rotors
+  p_rotors = new vector<Rotor *>;
 }
 
 Enigma::~Enigma()
 {
-  rotors->clear();
-  delete rotors;
-  delete plugboard;
-  delete reflector;
+  p_rotors->clear();
+  delete p_rotors;
+  delete p_plugboard;
+  delete p_reflector;
 }
 
 void Enigma::setPlugboard(Plugboard *p)
 {
-  plugboard = p;
+  p_plugboard = p;
 }
 
 void Enigma::setReflector()
 {
-  reflector = new Reflector();
+  p_reflector = new Reflector();
 }
 
 void Enigma::addRotor(Rotor* r)
 {
-  rotors->push_back(r);
+  p_rotors->push_back(r);
 }
 
 void Enigma::rotateRotors()
 {
-  for (vector<Rotor *>::iterator it = rotors->begin(); it != rotors->end(); ++it)
+  for (vector<Rotor *>::iterator it = p_rotors->begin(); it != p_rotors->end(); ++it)
   {
     (*it)->rotate();
-    if ((it + 1) != rotors->end())
+    if ((it + 1) != p_rotors->end())
     {
       (*(it + 1))->adjustAfterRotation();
     }
@@ -46,16 +47,16 @@ void Enigma::rotateRotors()
 
 void Enigma::encrypt(int &letter)
 {
-  plugboard->encode(letter);
-  for (vector<Rotor *>::iterator it = rotors->begin(); it != rotors->end(); ++it)
+  p_plugboard->encode(letter);
+  for (vector<Rotor *>::iterator it = p_rotors->begin(); it != p_rotors->end(); ++it)
   {
     (*it)->encode(letter);
   }
-  reflector->encode(letter);
-  for (vector<Rotor *>::reverse_iterator rit = rotors->rbegin(); rit != rotors->rend(); ++rit)
+  p_reflector->encode(letter);
+  for (vector<Rotor *>::reverse_iterator rit = p_rotors->rbegin(); rit != p_rotors->rend(); ++rit)
   {
     (*rit)->inverseEncode(letter);
   }
-  plugboard->encode(letter);
+  p_plugboard->encode(letter);
   rotateRotors();
 }
